@@ -1,0 +1,42 @@
+%template1.tex
+%The following LaTeX source file represents the simplest kind of slide presentation; no overlays, no included graphics. Substitute your favorite style for ``pascal''. To create the PDF file template1.pdf, (1) be sure to use the prosper class, then (2) execute the command latex template1.tex, and (3) the command dvipdf template1.dvi.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% template1.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,blends,pdf,colorBG,slideColor]{prosper}
+\include{defs}
+\begin{document}
+
+\bs{Equivalence Proof}
+{\bf Proposition:} In  language THREE
+ the sentence $E + E$ is semantically
+equivalent to $2 * E$ for any subexpression $E\in L(\mbox{THREE})$.
+
+(Observe that $E + E \ne 2 *E$ because this is just syntax, that is,
+the abstract syntax trees of these two expressions do not look the same, but we 
+expect that semantically they express the  same thing.)
+
+{\bf Proof:} From elementary algebra we know that given any integer value $i$ we
+have $i + i = 2 \times i$.  We will use this identity in our proof.
+
+Assume that $\langle E, C \rangle \rightarrow e$, that is, we assume that our 
+subexpression $E$ evaluates to some integer value $e$ in the context of the
+binding environment $C$. So,
+\begin{prooftree}
+\AxiomC{$\langle {\tt var}(x), C \rangle \rightarrow \mathit{lookup}(x,C)=k$}
+\AxiomC{$\langle {\tt var}(x), C \rangle \rightarrow \mathit{lookup}(x,C)=k$}
+\BinaryInfC{$\langle {\tt plus}({\tt var}(x),{\tt var}(x)),C\rangle \rightarrow k + k = 2\times k$}
+\end{prooftree}
+which follows from our algebraic identity above. Now,
+\begin{prooftree}
+\AxiomC{$\langle 2,C\rangle \rightarrow 2$}
+\AxiomC{$\langle {\tt var}(x), C \rangle \rightarrow \mathit{lookup}(x,C)=k$}
+\BinaryInfC{$\langle {\tt times}(2,{\tt var}(x)),C\rangle \rightarrow 2 \times k$}
+\end{prooftree}
+This concludes our proof. $\Box$
+
+
+
+\es
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% end of template1.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
